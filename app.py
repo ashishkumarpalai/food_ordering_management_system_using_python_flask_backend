@@ -1,6 +1,7 @@
 import os
 
 from flask import Flask, jsonify, request
+from dotenv import load_dotenv
 from flask_pymongo import PyMongo
 import uuid
 from bson import ObjectId
@@ -8,9 +9,11 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 cors = CORS(app)
+load_dotenv()
 
+mongodb_uri = os.getenv('MONGO_URI')
 # Configure MongoDB connection
-app.config['MONGO_URI'] = 'mongodb+srv://ashish:ashish@cluster0.dsmyzjx.mongodb.net/zesty_zomato?retryWrites=true&w=majority'
+app.config['MONGO_URI'] = mongodb_uri
 mongo = PyMongo(app)
 
 # Default routes
